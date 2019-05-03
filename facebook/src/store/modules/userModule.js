@@ -1,36 +1,39 @@
 import { getCredentials } from "../../service.js";
 
 export const userModule = {
-    state: {
-        userDetails: [],
-        specificUser:[]
+  state: {
+    userDetails: [],
+    userName: ''
+  },
+  getters: {
+    userLogin(state) {
+      console.log(state.userDetails, "ee");
+      state.userDetails.users.filter(el => {
+        console.log(el.name);
+      });
+      return state.userDetails;
     },
-    getters: {
-        userLogin(state) {
-            return state.userDetails;
-        },
-    },
-    actions: {
-        checkData({ commit }) {
-            return new Promise((resolve)=>{
-                getCredentials().then(credentials => {
-                    resolve(credentials);
-                    commit('getJsonData', credentials)
-                });
-            })
-        },
-        loggedInUser({ commit } ) {
-            commit('getLoggedInUser',name)
-            console.log("logged in called");
-        }
-    },
-    mutations: {
-        getJsonData(state, credentials) {
-            state.userDetails = credentials
-        },
-        getLoggedInUser(state, name){
-            console.log(state.userDetails);
-        }
-    },
+    specificUser(state) {
+      return state.userDetails;
+    }
+  },
+  actions: {
+    checkData({ commit }) {
+      return new Promise((resolve) => {
+        getCredentials().then(credentials => {
+          resolve(credentials);
+          commit('getJsonData', credentials)
+        });
+      })
+    }
+  },
+  mutations: {
+    getJsonData(state, credentials) {
+      state.userDetails = credentials;
+      state.specificUser = state.userDetails;
+      console.log(state.userDetails)
+    }
+
+  },
 
 }

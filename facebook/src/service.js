@@ -5,7 +5,6 @@ export function getCredentials() {
         axios
         .get("./static/user.json")
         .then(response =>{
-            console.log("axios called");
             return resolve(response.data);
         })
         .catch(error => {
@@ -13,3 +12,18 @@ export function getCredentials() {
         });
     });
 }
+
+export function getData() {
+  return new Promise((resolve, reject) => {
+      axios
+          .get("./static/feeds.json")
+          .then(response => {
+            console.log("axios call")
+              return resolve(response.data);
+          })
+          .catch(error => {
+              reject(error);
+          });
+  });
+}
+

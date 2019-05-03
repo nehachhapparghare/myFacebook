@@ -4,7 +4,7 @@
       <v-layout align-center justify-center v-if="!flag">
         <v-flex xs12 sm6 md4>
           <v-card class="elevation-12">
-            <v-toolbar dark class="deep-purple darken-3">
+            <v-toolbar class="cyan lighten-3">
               <v-toolbar-title justify-center class="font-weight-medium">Login Form</v-toolbar-title>
               <v-spacer></v-spacer>
             </v-toolbar>
@@ -35,7 +35,11 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn dark class="deep-purple darken-3 elevation-6" v-on:click="getCredentials">Login</v-btn>
+              <v-btn
+                dark
+                class="cyan lighten-3 darken-3 elevation-6"
+                v-on:click="getCredentials"
+              >Login</v-btn>
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -56,7 +60,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn v-on:click="loginSucess('./home')">OK</v-btn>
+              <v-btn v-on:click="loginSucess('./feeds')">OK</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -67,7 +71,7 @@
       </v-snackbar>
     </v-container>
   </v-content>
-</template> 
+</template>
 
 <script>
 export default {
@@ -109,28 +113,22 @@ export default {
       ];
     },
     getCredentials() {
-      this.$store
-        .dispatch("checkData")
-        .then(() => {
-          this.$store.getters.userLogin.users.filter(el => {
-            if (el.userId == this.userId && el.password == this.password) {
-              this.flag = true;
-              this.type = el.type;
-              localStorage.setItem("name", el.name);
-            }
-            if (this.userId.length == 0 && this.password.length == 0) {
-              this.snackbar = true;
-            }
-          });
-        })
-        .catch(error => console.log("error :-", error));
+      this.$store.getters.userLogin.users.filter(el => {
+        if (el.userId == this.userId && el.password == this.password) {
+          this.flag = true;
+          localStorage.setItem("name", el.name);
+        }
+        if (this.userId.length == 0 && this.password.length == 0) {
+          this.snackbar = true;
+        }
+      });
     },
     loginSucess(name) {
       this.$router.push(name);
     }
   }
 };
-</script> 
+</script>
 
 
 <style>
