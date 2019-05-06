@@ -12,14 +12,14 @@ export const feedsModule = {
   actions: {
     loadData({ commit }) {
       getData().then(data1 => {
-        commit('getJsonData', data1)
+        commit('getFeedsData', data1)
       });
     },
 
   },
   mutations: {
-    getJsonData(state, posts) {
-      console.log(posts, "post");
+  getFeedsData(state, posts) {
+      console.log(posts, "feeds in mutations");
       state.feeds =  posts;
     },
 

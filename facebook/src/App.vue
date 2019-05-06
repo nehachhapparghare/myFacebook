@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <app-header v-if="isAuthenticated"></app-header>
+    <app-header v-if="showHeader"></app-header>
 
     <router-view></router-view>
 
-    <app-footer v-if="isAuthenticated"></app-footer>
+    <app-footer v-if="showHeader"></app-footer>
   </v-app>
 </template>
 
@@ -17,15 +17,32 @@ export default {
     "app-footer": Footer
   },
   data: () => ({
-    isAuthenticated: false
+    isAuthenticated: false,
+    name: ""
   }),
-  created() {
-    console.log(this.$route);
+  updated() {
     if (this.$route.name == "feeds") {
       this.isAuthenticated = true;
     }
-    this.$store.dispatch("checkData");
-    this.$store.dispatch("loadData");
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== "login" ? true : false;
+    }
+  },
+  created() {
+    console.log(this.$route);
+    this.$store.dispatch("checkData").then(() => {
+      this.name = localStorage.getItem("name");
+      console.log(this.name, "name of loggin user");
+      if (this.name == undefined) {
+        console.log("nothing in localStorage");
+        this.$router.push("./");
+      } else {
+        console.log(" in localStorage");
+        this.$store.dispatch("specificUser", this.name);
+      }
+    });
   }
 };
 </script>

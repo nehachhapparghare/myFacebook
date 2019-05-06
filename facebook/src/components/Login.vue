@@ -46,7 +46,7 @@
         </v-flex>
       </v-layout>
       <v-layout align-center justify-center v-if="flag">
-        <v-flex xs12 sm6 md4>
+        <v-flex xs12 sm4 md2>
           <v-card class="elevation-3">
             <v-toolbar class="deep-purple lighten-4">
               <v-spacer></v-spacer>
@@ -89,13 +89,10 @@ export default {
     text: "Fill all the credentials",
     type: "",
     name: "",
-    details: []
+    details: [],
+    logged: ""
   }),
-  computed: {
-    // userLogin() {
-    //   return this.$store.getters.userLogin;
-    // }
-  },
+
   methods: {
     emailRules() {
       return [
@@ -113,10 +110,12 @@ export default {
       ];
     },
     getCredentials() {
+      console.log(this.$store.getters.userLogin.users, "users in login");
       this.$store.getters.userLogin.users.filter(el => {
         if (el.userId == this.userId && el.password == this.password) {
           this.flag = true;
           localStorage.setItem("name", el.name);
+          // this.$store.dispatch("specificUser", el.name);
         }
         if (this.userId.length == 0 && this.password.length == 0) {
           this.snackbar = true;
@@ -124,6 +123,8 @@ export default {
       });
     },
     loginSucess(name) {
+      this.logged = localStorage.getItem("name");
+      this.$store.dispatch("specificUser", this.logged);
       this.$router.push(name);
     }
   }
