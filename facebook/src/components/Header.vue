@@ -5,15 +5,15 @@
       <v-spacer></v-spacer>
       <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>
       <v-spacer></v-spacer>
-      <v-flex v-on:click="showLoggOut">
-        <v-responsive class="pt-4">
-          <v-avatar size="50" color="grey lighten-4">
-            <v-img :src="showLoggedInUser.dp"></v-img>
-          </v-avatar>
-        </v-responsive>
-        <v-spacer></v-spacer>
-        <h3>{{showLoggedInUser.name}} {{showLoggedInUser.lastName}}</h3>
-      </v-flex>
+      <v-layout v-on:click="showLoggOut" >
+        <!-- <v-responsive class="pt-0"> -->
+        <v-avatar size="50" color="grey lighten-4">
+          <v-img :src="showLoggedInUser.dp"></v-img>
+        </v-avatar>
+        <!-- </v-responsive> -->
+        <h2>{{showLoggedInUser.name}} {{showLoggedInUser.lastName}}</h2>
+      </v-layout>
+
       <!-- <v-btn v-on:click="loggOut">Loggout</v-btn> -->
     </v-toolbar>
 
@@ -62,5 +62,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+h2{
+  padding: 20px;
+}
 </style>

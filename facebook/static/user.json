@@ -3,7 +3,7 @@
     {
       "name": "Marissa",
       "lastName": "Mayer",
-      "dp": "assets/images/merrisa.jpg",
+      "dp": "/static/assets/images/merrisa.jpg",
       "userId": "Marissa.mayer",
       "password": "12345",
       "id": 1,
@@ -15,7 +15,7 @@
     {
       "name": "Eric",
       "lastName": "Schmidt",
-      "dp": "images/eric.jpg",
+      "dp": "/static/assets/images/eric.jpg",
       "userId": "eric.schmidt",
       "password": "12345",
       "id": 2,
@@ -28,7 +28,7 @@
     {
       "name": "elon",
       "lastName": "musk",
-      "dp": "images/elon.png",
+      "dp": "/static/assets/images/elon.png",
       "userId": "elon.musk",
       "password": "12345",
       "id": 3,
@@ -40,7 +40,7 @@
     {
       "name": "Your Story",
       "lastName": "",
-      "dp": "images/yourstory.png",
+      "dp": "/static/assets/images/yourstory.png",
       "userId": "yourstory",
       "password": "12345",
       "id": 4,
@@ -51,7 +51,7 @@
     {
       "name": "National Geopraphic",
       "lastName": "",
-      "dp": "images/natgeo.jpg",
+      "dp": "/static/assets/images/natgeo.jpg",
       "userId": "natgeo",
       "password": "12345",
       "id": 5,
@@ -62,7 +62,7 @@
     {
       "name": "Tripoto",
       "lastName": "",
-      "dp": "images/tripoto.jpg",
+      "dp": "/static/assets/images/tripoto.jpg",
       "userId": "tripoto",
       "password": "12345",
       "id": 6,
@@ -73,7 +73,7 @@
     {
       "name": "You News",
       "lastName": "",
-      "dp": "images/younews.png",
+      "dp": "/static/assets/images/younews.png",
       "userId": "younews",
       "password": "12345",
       "id": 7,
