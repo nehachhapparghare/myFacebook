@@ -3,7 +3,7 @@
       {
           "id": 1,
           "type": "news media",
-          "userId": 1,
+          "userId": 3,
           "title": "It's the end of an era as former Google chief Eric Schmidt leaves Alphabet's board",
           "image": "/static/assets/image/yourstory/feed_1.png",
           "description": "Google founders Larry Page and Sergey Brin recruited the proven businessman and skilled software engineer as chief executive in 2001, bringing a mature hand to the helm of the then three-year-old internet search company."
@@ -19,7 +19,7 @@
       {
           "id": 3,
           "type": "news media",
-          "userId": 1,
+          "userId": 4,
           "title": "[Funding alert] BlackBuck raises $150 M in Series D led by Goldman Sachs Investment Partners and Accel",
           "image": "/static/assets/image/yourstory/feed_3.png",
           "description": "The company will deploy these funds to penetrate deeper into the market, by on boarding new trucking partners along the existing as well as new transportation corridors. The company will invest heavily in product and data sciences capabilities, to enable more efficient freight matching processes."
@@ -27,7 +27,7 @@
       {
           "id": 4,
           "type": "news media",
-          "userId": 4,
+          "userId": 3,
           "title": "A fresh design for Facebook, interoperable Messenger app, and business catalogue on WhatsApp: key announcements from Day 1 of F8",
           "image": "/static/assets/image/yourstory/feed_4.png",
           "description": "The biggest highlight was the new redesign to Facebook. In a bid to ensure that Facebook is a place for s to connect with people sharing similar passions, the social media platform has put Groups at the centre of the redesign"

@@ -1,5 +1,5 @@
 <template>
-  <v-footer height="auto" color="cyan lighten-3" class="elevation-12">
+  <v-footer height="auto" color="cyan lighten-3" class="elevation-12" fixed app>
     <v-layout justify-center row wrap>
       <v-flex color="cyan lighten-3" dark py-3 text-xs-center black--text xs12>
         &copy;2018 —
