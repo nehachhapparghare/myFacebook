@@ -1,9 +1,16 @@
 <template>
   <v-card>
     <v-toolbar color="cyan lighten-3" fixed app>
-      <h1>Welcome</h1>
+      <h1 class="indigo--text text--accent-3">Welcome</h1>
       <v-spacer></v-spacer>
-      <v-text-field v-model="search" append-icon="search" label="Search" v-on:keyup.enter="searchFunction(search)" single-line hide-details ></v-text-field>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Search"
+        v-on:keyup="searchFunction(search)"
+        single-line
+        hide-details
+      ></v-text-field>
       <v-spacer></v-spacer>
       <v-avatar size="50" color="grey lighten-4">
         <v-img :src="showLoggedInUser.dp"></v-img>
@@ -47,8 +54,13 @@
         this.$router.push("./");
       },
       searchFunction(search) {
-        console.log("searchFunction called", search);
-        this.$store.dispatch("searchData", search);
+        if (search == "") {
+          console.log("empty");
+          this.$store.dispatch("loadData");
+        } else {
+          console.log("searchFunction called", search);
+          this.$store.dispatch("searchData", search);
+        }
       }
     }
   };
