@@ -6,9 +6,10 @@
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-btn
+                dark
                 round:true
                 id="dropDown"
-                color="cyan accent-2"
+                color="teal darken-1"
                 v-on="on"
                 fixed
                 v-on:click="showByCategory()"
@@ -16,7 +17,11 @@
             </template>
             <v-list>
               <v-list-tile v-for="type in types" :key="type.id">
-                <v-list-tile-title v-on="on" v-on:click="selectType(type)">{{ type }}</v-list-tile-title>
+                <v-list-tile-title
+                  v-on="on"
+                  v-on:click="selectType(type)"
+                  class="cursorPoiner"
+                >{{ type }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -25,17 +30,9 @@
 
       <v-container class="ma-4">
         <v-layout align-center row wrap>
-          <v-flex
-            xs12
-            md6
-            v-for="feed in feeds"
-            :key="feed.id"
-            v-if="feeds.length"
-            v-on:click="openFeeds(feed)"
-          >
-            <!-- <router-link v-bind:to="'/selectedFeed/' + feed.id"> -->
+          <v-flex xs12 md6 v-for="feed in feeds" :key="feed.id" v-if="feeds.length">
             <v-card class="elevation-12 ma-4">
-              <v-toolbar class="cyan lighten-3">
+              <v-toolbar class="teal lighten-3 cursorPoiner" v-on:click="openFeeds(feed)">
                 <v-avatar size="40" color="grey lighten-4">
                   <v-img :src="postedUser(feed.userId).dp"></v-img>
                 </v-avatar>
@@ -51,23 +48,24 @@
               <v-flex xs12>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn flat icon color="pink accent-2">
-                    <v-icon>favorite</v-icon>
+                  <v-btn flat icon color="blue lighten-2" v-on:click="addLikes(feed.like)">
+                    <v-icon medium>favorite</v-icon>
                   </v-btn>
-                  <v-btn flat color="deep-orange accent-2">
-                    <v-icon>chat</v-icon>
+                  <h3 class="blue--text text--lighten-2">Liked by {{feed.like}}</h3>
+                  <v-btn flat color="teal lighten-3">
+                    <v-icon medium>chat</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-flex>
             </v-card>
-            <!-- </router-link> -->
           </v-flex>
           <v-container fluid fill-height>
             <v-layout align-center justify-center>
-              <v-flex xs12 md6>
-                <v-card class="elevation-5" height="150px">
-                  <v-spacer></v-spacer>
-                  <v-card-text>No Data Available</v-card-text>
+              <v-flex xs12 md6 v-if="feeds.length == 0" text-xs-center>
+                <v-card class="elevation-5 teal lighten-5" height="150px">
+                  <v-card-text>
+                    <h1>No Data Available</h1>
+                  </v-card-text>
                 </v-card>
               </v-flex>
             </v-layout>
@@ -95,19 +93,12 @@
     },
     computed: {
       feeds() {
-        // console.log(this.$store.getters.getFeeds, "feeeeds", this.selectedType);
         if (this.selectedType && this.selectedType !== "All") {
           return this.$store.getters.getFeeds.filter(
             f => f.type === this.selectedType
           );
         } else {
-          // console.log(this.$store.getters.getFeeds, "feeeeds");
-          // if (this.$store.getters.getFeeds.length == 0) {
-          //   this.showSnackbar = true;
-          //   return false;
-          // } else {
           return this.$store.getters.getFeeds;
-          // }
         }
       },
       getData() {
@@ -128,11 +119,11 @@
       postedUser(userID) {
         this.userData = this.$store.getters.userLogin.users;
         console.log(this.userData, "userData", userID);
-        let userHeader = this.userData.find(a => {
+        let userInHeader = this.userData.find(a => {
           return a.id === userID;
         });
-        console.log(userHeader);
-        return userHeader;
+        console.log(userInHeader);
+        return userInHeader;
       },
       showByCategory() {
         let array = [];
@@ -157,6 +148,9 @@
         this.$store.dispatch("getSelectedFeed", selectedFeed).then(() => {
           this.$router.push("./selectedFeed");
         });
+      },
+      addLikes(like) {
+        console.log(like);
       }
     }
   };
@@ -165,5 +159,8 @@
 <style scoped>
   #dropDown {
     z-index: 1;
+  }
+  .cursorPoiner {
+    cursor: pointer !important;
   }
 </style>

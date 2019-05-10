@@ -1,10 +1,11 @@
 <template>
   <v-card>
-    <v-toolbar color="cyan lighten-3" fixed app>
-      <h1 class="indigo--text text--accent-3">Welcome</h1>
+    <v-toolbar color="teal lighten-3" fixed app >
+      <h1>Welcome</h1>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
+        class="blue-grey--text"
         append-icon="search"
         label="Search"
         v-on:keyup="searchFunction(search)"
@@ -12,14 +13,12 @@
         hide-details
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-avatar size="50" color="grey lighten-4">
+      <v-avatar size="50" color="grey lighten-4" class="mousePointer">
         <v-img :src="showLoggedInUser.dp"></v-img>
       </v-avatar>
-      <h2>{{showLoggedInUser.name}} {{showLoggedInUser.lastName}}</h2>
-      <v-spacer></v-spacer>
-      <v-btn color="cyan darken-2" round:true dark @click="showLoggOut">Loggout</v-btn>
+      <h2 class="mousePointer">{{showLoggedInUser.name}} {{showLoggedInUser.lastName}}</h2>
+      <v-btn color="teal darken-1" round:true dark @click="showLoggOut">Logout</v-btn>
     </v-toolbar>
-
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
         <v-card-title class="headline">Do You Want To Loggout ?</v-card-title>
@@ -70,4 +69,8 @@
   h2 {
     padding: 20px;
   }
+  .mousePointer {
+    cursor: pointer;
+  }
+  
 </style>

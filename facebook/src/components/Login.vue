@@ -103,10 +103,6 @@ export default {
     passwordRules() {
       return [
         v => !!v || "Password is required"
-        // v =>
-        //   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,12}$/.test(
-        //     v
-        //   ) || "Password must be valid"
       ];
     },
     getCredentials() {
@@ -115,7 +111,6 @@ export default {
         if (el.userId == this.userId && el.password == this.password) {
           this.flag = true;
           localStorage.setItem("name", el.name);
-          // this.$store.dispatch("specificUser", el.name);
         }
         if (this.userId.length == 0 && this.password.length == 0) {
           this.snackbar = true;
