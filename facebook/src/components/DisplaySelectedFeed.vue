@@ -26,21 +26,9 @@
                 <v-icon medium>favorite</v-icon>
               </v-btn>
               <h3 class="blue--text text--lighten-2">Liked by {{getSingleFeed.like}}</h3>
-              <v-btn flat color="teal lighten-2" v-on:click="addComment">
+              <v-btn flat color="teal lighten-2">
                 <v-icon medium>chat</v-icon>
               </v-btn>
-              <v-flex xs12 sm6 md3 v-if="comment">
-                <v-text-field
-                  label="Comment"
-                  v-model="commentBox"
-                  v-on:keyup.enter="commentArea(commentBox)"
-                ></v-text-field>
-              </v-flex>
-              <v-layout>
-                <v-flex v-if="showCommentText">
-                  <h3>{{commentBox}}</h3>
-                </v-flex>
-              </v-layout>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -52,10 +40,7 @@
 <script>
   export default {
     data: () => ({
-      singleFeed: {},
-      comment: false,
-      commentBox: "",
-      showCommentText: false
+      singleFeed: {}
     }),
     created() {
       if (!this.getSingleFeed) {
@@ -79,16 +64,9 @@
         console.log(userHeader);
         return userHeader;
       },
-      addComment() {
-        this.comment = true;
-      },
-      commentArea(commentBox) {
-        this.comment = false;
-        this.showCommentText = true;
-        console.log(commentBox);
-      },
+
       goBackToFeed() {
-        this.$router.push('./feeds');
+        this.$router.push("./feeds");
       }
     }
   };

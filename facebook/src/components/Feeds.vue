@@ -1,37 +1,40 @@
 <template>
   <v-content>
     <v-container>
-      <v-layout class="mr-4">
-        <div>
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                dark
-                round:true
-                id="dropDown"
-                color="teal darken-1"
-                v-on="on"
-                fixed
-                v-on:click="showByCategory()"
-              >See By Categories</v-btn>
-            </template>
-            <v-list>
-              <v-list-tile v-for="type in types" :key="type.id">
-                <v-list-tile-title
-                  v-on="on"
-                  v-on:click="selectType(type)"
-                  class="cursorPoiner"
-                >{{ type }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </div>
-      </v-layout>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            dark
+            id="dropDown"
+            color="teal darken-1"
+            v-on="on"
+            fixed
+            v-on:click="showByCategory()"
+          >See By Categories</v-btn>
+        </template>
+        <v-list>
+          <v-list-tile v-for="type in types" :key="type.id">
+            <v-list-tile-title
+              v-on="on"
+              v-on:click="selectType(type)"
+              class="cursorPoiner"
+            >{{ type }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
 
+      <v-btn
+        id="activity"
+        fixed
+        absolute
+        dark
+        color="teal darken-1"
+        v-on:click="showActivityLog"
+      >Activity Log</v-btn>
       <v-container class="ma-4">
         <v-layout align-center row wrap>
           <v-flex xs12 md6 v-for="feed in feeds" :key="feed.id" v-if="feeds.length">
-            <v-card class="elevation-12 ma-4">
+            <v-card class="elevation-12 ma-4" height="700px">
               <v-toolbar class="teal lighten-3 cursorPoiner" v-on:click="openFeeds(feed)">
                 <v-avatar size="40" color="grey lighten-4">
                   <v-img :src="postedUser(feed.userId).dp"></v-img>
@@ -48,7 +51,13 @@
               <v-flex xs12>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn flat icon color="blue lighten-2" v-on:click="addLikes(feed.like)">
+                  <v-btn
+                    flat
+                    icon
+                    color="blue lighten-2"
+                    v-model="liked"
+                    v-on:click="addLikes(feed ,feed.like)"
+                  >
                     <v-icon medium>favorite</v-icon>
                   </v-btn>
                   <h3 class="blue--text text--lighten-2">Liked by {{feed.like}}</h3>
@@ -86,7 +95,10 @@
       postedUserObj: {},
       types: [],
       on: "",
-      selectedType: ""
+      selectedType: "",
+      activeFeeds: [],
+      liked: true,
+      finalActivatedFeeds: []
     }),
     created() {
       this.$store.dispatch("loadData");
@@ -149,8 +161,23 @@
           this.$router.push("./selectedFeed");
         });
       },
-      addLikes(like) {
-        console.log(like);
+      addLikes(feed, like) {
+        console.log(feed, "liked Feed");
+        console.log(like, "likes");
+        if (feed.like == 0) {
+          feed.like = feed.like + 1;
+          this.activeFeeds.push(feed);
+          console.log(this.activeFeeds, "active feeds");
+          this.$store.dispatch("setActivityLog", this.activeFeeds);
+        } else {
+          this.liked = false;
+          feed.like = 0;
+          console.log(feed, "unliked");
+          this.$store.dispatch("getUnlinkedFeed", feed);
+        }
+      },
+      showActivityLog() {
+        this.$router.push("./activityLog");
       }
     }
   };
@@ -162,5 +189,9 @@
   }
   .cursorPoiner {
     cursor: pointer !important;
+  }
+  #activity {
+    left: 300px;
+    z-index: 1;
   }
 </style>
