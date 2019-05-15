@@ -31,6 +31,12 @@
         color="teal darken-1"
         v-on:click="showActivityLog"
       >Activity Log</v-btn>
+      <v-btn  id="practice"
+        fixed
+        absolute
+        dark
+        color="teal darken-1"
+        v-on:click="goToPractice">practice</v-btn>
       <v-container class="ma-4">
         <v-layout align-center row wrap>
           <v-flex xs12 md6 v-for="feed in feeds" :key="feed.id" v-if="feeds.length">
@@ -178,6 +184,9 @@
       },
       showActivityLog() {
         this.$router.push("./activityLog");
+      },
+      goToPractice() {
+        this.$router.push("./practice");
       }
     }
   };
@@ -192,6 +201,10 @@
   }
   #activity {
     left: 300px;
+    z-index: 1;
+  }
+  #practice {
+     left: 500px;
     z-index: 1;
   }
 </style>
